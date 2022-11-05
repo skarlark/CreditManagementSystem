@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController()
 @EnableAutoConfiguration
-@ComponentScan(basePackages = "org.example.service")
+@ComponentScan(basePackages = "org.example")
 @RequestMapping("/credit")
 public class CreditApp {
 

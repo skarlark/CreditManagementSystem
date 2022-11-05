@@ -26,6 +26,11 @@ public class CreditPlanServiceImpl implements CreditPlanService {
     @Override
     public CreditPlan generateCreditPlan(Credit credit) {
 
+        float creditAmount = credit.getCreditAmount();
+        float paybackPeriod = credit.getPaybackPeriod();
+        if (creditAmount <= 0.0 || paybackPeriod <= 0)
+            throw new IllegalArgumentException("Please provide valid input");
+
         float amortizedAmount = Math.round(credit.getCreditAmount() / credit.getPaybackPeriod().floatValue());
 
         CreditPlan.CreditPlanBuilder creditPlanBuilder = new CreditPlan.CreditPlanBuilder().withApprovedAmount(credit.getCreditAmount())
@@ -57,6 +62,8 @@ public class CreditPlanServiceImpl implements CreditPlanService {
         if (dueCredit == null || credit == null) {
             throw new IllegalStateException("Credit Id/Due Credit doesn't exist");
         }
+        if (approvedAmount <= 0.0 || paybackPeriod <= 0)
+            throw new IllegalArgumentException("Please provide valid input");
         return updateDueCreditInfo(dueCredit.getDueCreditId(), creditID, approvedAmount, paybackPeriod, credit.getAnnualInterest(), credit.getInvoiceFee(), dueCredit.getDueDate());
     }
 
