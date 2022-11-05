@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @EnableAutoConfiguration
 @ComponentScan(basePackages = "org.example.service")
 @RequestMapping("/credit")
-public class App {
+public class CreditApp {
 
     @Autowired
     private CreditPlanService creditPlanService;
@@ -33,9 +33,8 @@ public class App {
         return creditPlanService.updateCreditPlan(updateCreditPlanRequest.getCreditId(), updateCreditPlanRequest.getApprovedAmount(), updateCreditPlanRequest.getPaybackPeriod());
     }
 
-
     public static void main(String[] args) {
-        SpringApplication.run(App.class, args);
+        SpringApplication.run(CreditApp.class, args);
     }
 
 
